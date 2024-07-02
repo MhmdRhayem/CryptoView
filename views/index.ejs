@@ -24,15 +24,18 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
+        <% if (locals.data) {%>
         <div class="card text-center" style="width: 18rem;">
             <div class="card-header">
-                Card Header
+                <%= data.symbol %>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Card Title</h5>
-                <p class="card-text">Price: </p>
+                <p class="card-text">Price: <%= data.price_24h %></p>
+                <p class="card-text">Volume: <%= data.volume_24h %></p>
+                <p class="card-text">Last Trade Price:  <%= data.last_trade_price %></p>
             </div>
         </div>
+        <% } %>
 
   </body>
 </html>
