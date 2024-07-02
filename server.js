@@ -2,6 +2,7 @@ import express from 'express'
 import { dirname } from "path"
 import { fileURLToPath } from "url";
 import bodyParser from 'body-parser';
+import axios from 'axios';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const API_KEY = 'https://api.blockchain.com/v3/exchange'
@@ -14,9 +15,16 @@ app.get("/",(req,res)=>{
     res.render("index.ejs");
 });
 
-app.post("/submit",(req,res)=>{
-    console.log(req.body);
-    res.send("Post request received");
+app.post("/submit",async (req,res)=>{
+    try{
+        const result = await axios.get(`${API_KEY}/tickers/BTC-US`);
+        console.log(result.data);
+        res.send("Post request received");
+        res.render("index.ejs",{data:result.data})
+    }catch(err){
+        console.log(err);
+        res.render("index.ejs",{data:err})
+    }
 });
 
 app.listen(port, () => {
