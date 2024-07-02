@@ -35,7 +35,9 @@
                 <p class="card-text">Last Trade Price:  <%= data.last_trade_price %></p>
             </div>
         </div>
+        <% } else if (locals.err) {%>
+        <div class="alert alert-danger" role="alert">
+            <%= err %>
         <% } %>
-
   </body>
 </html>

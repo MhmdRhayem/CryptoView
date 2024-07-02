@@ -17,13 +17,10 @@ app.get("/",(req,res)=>{
 
 app.post("/submit",async (req,res)=>{
     try{
-        console.log(req.body)
         const result = await axios.get(`${API_KEY}/tickers/${req.body.symbol}`);
-        console.log(result.data);
         res.render("index.ejs",{data:result.data})
     }catch(err){
-        console.log(err);
-        res.render("index.ejs",{data:err})
+        res.render("index.ejs",{err:err.message})
     }
 });
 
